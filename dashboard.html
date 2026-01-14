@@ -1,527 +1,9 @@
-<!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<title>knz</title>
-<style>
-:root {
-  --neon:#ff3b3b;
-  --neon2:#b30000;
-  font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
-body {
-  margin:0;
-  min-height:100vh;
-  background:linear-gradient(180deg,#050305 0%, #0b0205 40%, #150308 80%, #25010a 100%);
-  color:#fff;
-  display:flex;
-  justify-content:center;
-  padding:60px 12px 120px;
-  -webkit-user-select:none;
-  user-select:none;
-  overflow-x:hidden;
-  opacity:1;
-  transition:opacity 0.6s ease;
-}
-.frame{width:360px;max-width:96vw;}
-.card{background:rgba(255,255,255,0.03);border-radius:16px;padding:18px;margin-bottom:28px;border:1px solid rgba(255,59,59,0.12);}
-.profile-top{display:flex;align-items:center;gap:14px;}
-.avatar{width:68px;height:68px;border-radius:50%;background:linear-gradient(180deg,#ff9a9a,#ff3b3b);display:flex;align-items:center;justify-content:center;border:4px solid rgba(0,0,0,0.25);overflow:hidden;}
-.avatar-img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
-.userid{color:var(--neon);font-size:20px;font-family:monospace;}
-.meta{font-size:12px;color:rgba(255,255,255,0.6);margin-top:6px;font-family:monospace;}
-.panel{background:rgba(255,255,255,0.02);border-radius:18px;padding:18px;border:1px solid rgba(255,59,59,0.1);position:relative;}
-.label{color:var(--neon);font-weight:600;margin-bottom:8px;display:block;font-size:14px;}
-.input{width:100%;box-sizing:border-box;padding:14px 16px;border-radius:12px;background:transparent;border:1px solid rgba(255,59,59,0.18);color:#fff;outline:none;font-size:14px;transition:border 0.3s;}
-.input:focus{border-color:var(--neon);}
-.input::placeholder{color:rgba(255,255,255,0.18);font-family:monospace;}
-.field{margin-bottom:16px;}
-.dropdown{position:relative;width:100%;display:flex;justify-content:center;}
-.dropdown-btn{width:90%;padding:14px 16px;border-radius:12px;background:transparent;border:1px solid rgba(255,59,59,0.18);color:#fff;font-size:14px;text-align:center;cursor:pointer;transition:transform 0.15s ease, background 0.3s ease;}
-.dropdown-btn:active{transform:scale(0.95);}
-.dropdown-list{display:block;position:absolute;top:calc(100% + 6px);width:90%;background:#1a0505;border:1px solid rgba(255,59,59,0.18);border-radius:12px;overflow:hidden;z-index:10;opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity 0.3s ease, transform 0.3s ease;}
-.dropdown-list.active{opacity:1;transform:translateY(0);pointer-events:auto;}
-.dropdown-item{padding:12px 14px;cursor:pointer;color:#fff;text-align:center;transition:background 0.2s;}
-.dropdown-item:hover{background:rgba(255,59,59,0.2);}
-button{transition:transform 0.15s ease, box-shadow 0.2s ease;}
-button:active{transform:scale(0.96);box-shadow:0 0 20px rgba(255,59,59,0.4);}
-.send-btn,.premium-btn{margin-top:18px;width:100%;padding:16px;border-radius:18px;font-weight:700;letter-spacing:2px;font-size:16px;background:linear-gradient(90deg,var(--neon) 0%,var(--neon2) 100%);color:#100010;border:none;cursor:pointer;}
-.send-btn:disabled{background:linear-gradient(90deg,#666 0%,#444 100%);color:#888;cursor:not-allowed;}
-.notice-card{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.015));border-radius:18px;padding:22px;margin-top:18px;margin-bottom:18px;border:1px solid rgba(255,59,59,0.08);color:rgba(255,255,255,0.9);font-size:13px;line-height:1.4;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.4) inset;}
-.toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:1001;display:flex;flex-direction:column;align-items:center;gap:10px;}
-.toast{background:rgba(255,59,59,0.9);color:#fff;padding:12px 20px;border-radius:12px;min-width:200px;text-align:center;animation:fadein 0.3s,fadeout 0.3s 2.2s;}
-@keyframes fadein{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeout{from{opacity:1;}to{opacity:0;}}
-*{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}
-button,.dropdown-btn,.dropdown-item,.send-btn{-webkit-tap-highlight-color:transparent;outline:none;}
-:focus{outline:none!important;}
-.fab-container{position:fixed;bottom:40px;right:40px;z-index:99;display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
-.fab,.fab-telegram,.fab-whatsapp{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--neon2));color:#100010;display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer;box-shadow:0 0 20px rgba(255,59,59,0.3);transition:transform 0.3s ease,opacity 0.3s ease;}
-.fab{font-size:34px;transition:transform 0.4s ease;}
-.fab.open{transform:rotate(225deg);}
-.fab-telegram,.fab-whatsapp{width:56px;height:56px;opacity:0;pointer-events:none;transform:translateY(0);}
-.fab-telegram.show,.fab-whatsapp.show{opacity:1;pointer-events:auto;transform:translateY(-10px);transition:transform 0.3s ease,opacity 0.3s ease;}
-.fab-telegram img,.fab-whatsapp img{width:28px;height:28px;}
-.jam-container{position:fixed;bottom:40px;left:40px;z-index:99;}
-.jam{width:64px;height:64px;border-radius:50%;backdrop-filter:blur(8px);background:rgba(255,59,59,0.08);border:2px solid rgba(255,59,59,0.4);display:flex;align-items:center;justify-content:center;font-weight:bold;color:var(--neon);font-size:14px;font-family:monospace;box-shadow:0 0 10px rgba(255,59,59,0.2);}
-.server-info-divider{width:100%;height:1px;background:rgba(255,59,59,0.25);margin:10px 0;}
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:1000;padding:24px;opacity:0;transition:opacity 0.3s ease;}
-.modal-backdrop.show{display:flex;opacity:1;}
-.modal-dialog{width:92%;max-width:360px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:18px;padding:18px;border:1px solid rgba(255,59,59,0.12);box-shadow:0 10px 40px rgba(0,0,0,0.6);transform:scale(0.85);opacity:0;transition:transform 0.3s ease,opacity 0.3s ease;}
-.modal-backdrop.show .modal-dialog{transform:scale(1);opacity:1;}
-.modal-title{color:var(--neon);font-weight:700;margin-bottom:10px;text-align:center;}
-.modal-input{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;background:transparent;border:1px solid rgba(255,59,59,0.16);color:#fff;outline:none;font-size:14px;margin-bottom:12px;}
-.modal-input::placeholder{color:rgba(255,255,255,0.25);font-family:monospace;}
-.modal-login-btn{width:100%;padding:12px;border-radius:14px;font-weight:700;letter-spacing:1px;font-size:14px;background:linear-gradient(90deg,var(--neon) 0%,var(--neon2) 100%);color:#100010;border:none;cursor:pointer;margin-bottom:10px;}
-.modal-note{font-size:12px;color:rgba(255,255,255,0.8);text-align:center;line-height:1.4;}
-.center{text-align:center;}
-
-  <div class="header">
-    <h1>MENU DASHBOARD</h1>
-    <div class="icon">⚙️</div>
-  </div>
-
-    <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> index1 - Cursed Project</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #000;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 400px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .logo {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-
-        .project-info {
-            font-size: 0.9em;
-            color: #777;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 25px;
-            border: 2px solid #555;
-            background-color: #111;
-            color: #fff;
-            font-size: 1em;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .login-button {
-            background-color: #8E24AA;
-            color: white;
-            padding: 14px 30px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1em;
-            width: 100%;
-            outline: none;
-        }
-
-        .login-button:hover {
-            background-color: #6A1B9A;
-        }
-    </style>
-</head>
-<body>
-    
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROVSP V4</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 600px;
-            margin: 20px;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .server-image {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .beta-test {
-            background-color: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-
-        .icons-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .icon-item {
-            text-align: center;
-        }
-
-        .icon-item img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #222;
-            padding: 10px;
-            margin-bottom: 5px;
-        }
-
-        .telegram-channel {
-            background-color: rgba(128, 0, 128, 0.2);
-            padding: 15px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .server-stats {
-            background-color: rgba(75, 0, 130, 0.3);
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .stat-item:last-child {
-            margin-bottom: 0;
-        }
-    </style>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index1 - Cursed Project</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #000;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 400px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .logo {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-
-        .project-info {
-            font-size: 0.9em;
-            color: #777;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 25px;
-            border: 2px solid #555;
-            background-color: #111;
-            color: #fff;
-            font-size: 1em;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .login-button {
-            background-color: #8E24AA;
-            color: white;
-            padding: 14px 30px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1em;
-            width: 100%;
-            outline: none;
-        }
-
-        .login-button:hover {
-            background-color: #6A1B9A;
-        }
-    </style>
-</head>
-<body>
-<div class="header">
-    <div class="container">
-        <h1>DEFFXY CRASH</h1>
-        <img src="https://files.catbox.moe/fi25mx.jpg" alt="Logo" class="logo">
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Gepeng</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-        .video-container {
-            width: 100%;
-            max-width: 900px;
-            border: 3px solid #ff0055;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
-        }
-        video {
-            width: 100%;
-            height: auto;
-            display: block;
-            background: #111;
-        }
-        .controls {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            color: white;
-        }
-        .controls button {
-            background: #ff0055;
-            border: none;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .controls button:hover {
-            background: #ff3366;
-        }
-    </style>
-</head>
-<body>     
-        <!DOCTYPE html>
-<html>
-<head>
-    <title>Video Lancar</title>
-    <style>
-        video {
-            max-width: 100%;
-            height: auto;
-            background: #000;
-        }
-    </style>
-</head>
-<body>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slider Gambar</title>
-    <style>
-        .slider-container {
-            width: 100%;
-            max-width: 600px; /* Sesuaikan lebar sesuai kebutuhan */
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 10px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            -webkit-overflow-scrolling: touch; /* Untuk iOS */
-        }
-
-        .slide {
-            display: inline-block;
-            width: 100%;
-            height: auto;
-            margin-right: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: #6c3483;
-        }
-
-        .slide:last-child {
-            margin-right: 0;
-        }
-
-        .slide:hover {
-            transform: scale(1.02);
-        }
-
-        /* Gaya untuk perangkat mobile */
-        @media (max-width: 768px) {
-            .slider-container {
-                max-width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="slider-container">
-        <!-- Gambar pertama (karakter ungu/pink) -->
-        <img src="https://files.catbox.moe/il537k.jpg" alt="Karakter Ungu" class="slide">
-    </div>
-</body>
-</html>
-
-</body>
-</html>
-</div>
-
-<body onload="document.body.style.opacity='1'">
-  <div class="frame">
-    <div class="card">
-        <div>
-          <div class="userid"></div>
-          <div class="meta">ROLE • MEMBER • EXP : 2025-12-18</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="field">
-        <label class="label" for="target">Target number / 目的地番号</label>
-        <input id="target" class="input" type="text" placeholder="ex +62xxxxxxxxxx" />
-      </div>
-
-      <div class="field">
-        <label class="label">Select bug / バグを選択</label>
-        <div class="dropdown" id="bugDropdown">
-          <button type="button" class="dropdown-btn" id="bugBtn">Select by DeffXy / 遅延無限大</button>
-          <div class="dropdown-list" id="bugList">
-            <div class="dropdown-item">Invisible / バグを選択</div>
-            <div class="dropdown-item">Delay Infinity / 遅延無限大</div>
-            <div class="dropdown-item">Crash Andro - ios / クラッシュ</div>
-            <div class="dropdown-item">BlankScreen / 空白の画面</div>
-            <div class="dropdown-item">InvisibleBlankUi / 難しい</div>
-            <div class="dropdown-item">IOScrssher / 破壊された</div>
-            <div class="dropdown-item">Hard2rHoursDelay / 遅れて</div>
-          </div>
-        </div>
-      </div>
-   </div>
-   
-      <button id="send" class="send-btn" type="button">SEND BUG / バグを送信</button>
-    </div>
-
-    <!-- Notice card dipindahkan ke bagian bawah -->
-    <div class="notice-card" id="noticeCard">
-      Aplikasi ini tidak untuk disalahgunakan, segala penggunaan aplikasi ini sepenuhnya ditanggung oleh pengguna tanpa melibatkan developer.
-    </div>
-  </div>
-
-  <div class="toast-container" id="toastContainer"></div>
-  <div class="jam-container"><div class="jam" id="jam">00:00</div></div>
-
-  <div class="fab-container">
-    <div class="fab-whatsapp" id="fabWhatsapp"><img src="wa.png" alt="WhatsApp" /></div>
-    <div class="fab-telegram" id="fabTelegram"><img src="tele.png" alt="Telegram" /></div>
-    <div class="fab" id="fab">+</div>
-  </div>
-
-  <div class="modal-backdrop" id="premiumBackdrop" aria-hidden="true">
-    <div class="modal-dialog" role="dialog" aria-modal="true">
-      <div class="modal-title center">MENU EXIZ / プレミアム</div>
-      <input id="premiumKey" class="modal-input" type="text" placeholder="SILAHKAN YANG MAU DONASI" />
-      <button id="premiumLogin" class="modal-login-btn" type="button">SEND DONASI</button>
-      <div class="modal-note">𝐁𝐘 𝐄𝐗𝐈𝐙 || 𝐃𝐄𝐅𝐅𝐗𝐘</div>
-    </div>
-  </div>
-  
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>WhatsApp</title>
     <style>
         body {
             background-color: #121212;
@@ -545,7 +27,6 @@ button,.dropdown-btn,.dropdown-item,.send-btn{-webkit-tap-highlight-color:transp
             transition: all 0.3s ease;
         }
 
-        /* Menu Navigasi Bawah */
         .bottom-nav {
             width: 100%;
             background-color: #2a2a2a;
@@ -593,7 +74,7 @@ button,.dropdown-btn,.dropdown-item,.send-btn{-webkit-tap-highlight-color:transp
 
         .icon-home::before { content: "🏠"; }
         .icon-whatsapp::before { content: "💬"; }
-        .icon-dashboard::before { content: "👻"; }
+        .icon-bug-system::before { content: "👻"; }
         .icon-tools::before { content: "⚙️"; }
 
         .android-navigation {
@@ -616,358 +97,179 @@ button,.dropdown-btn,.dropdown-item,.send-btn{-webkit-tap-highlight-color:transp
     </style>
 </head>
 <body>
-
-    <!-- Konten Home -->
-    <div class="content">
-        <h1>🏠 Selamat Datang di Halaman Home</h1>
-        <p>Ini adalah halaman utama aplikasi Anda.</p>
-        <div style="margin-top: 20px; padding: 15px; background: #333; border-radius: 10px;">
-            Klik menu di bawah untuk berpindah halaman.
-        </div>
-    </div>
-
-    <!-- Menu Navigasi Bawah -->
-    <div class="bottom-nav">
-         <div class="nav-item active">
-            <span class="nav-icon icon-home"></span>
-            <span class="nav-text">Home</span>
-        </div>
-        <div class="nav-item" onclick="window.location.href='whatsapp.html'">
-            <span class="nav-icon icon-whatsapp"></span>
-            <span class="nav-text">WhatsApp</span>
-        </div>
-        <div class="nav-item" onclick="window.location.href='dashboard.html'">
-            <span class="nav-icon icon-dashboard"></span>
-            <span class="nav-text">bug-system</span>
-        </div>
-        <div class="nav-item" onclick="window.location.href='tools.html'">
-            <span class="nav-icon icon-tools"></span>
-            <span class="nav-text">Tools</span>
-        </div>
-    </div>
-
-    <!-- Tombol Android (opsional) -->
-    <div class="android-navigation">
-        <div class="android-btn">≡</div>
-        <div class="android-btn">●</div>
-        <div class="android-btn">◀</div>
-    </div>
-
-</body>
-</html>
-
-    <script>
-        function switchPage(pageName) {
-            // Sembunyikan semua halaman
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-
-            // Tampilkan halaman yang dipilih
-            document.getElementById(pageName + '-page').classList.add('active');
-
-            // Update status aktif di menu
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-
-            // Aktifkan tab yang diklik
-            const navItems = document.querySelectorAll('.nav-item');
-            if (pageName === 'home') navItems[0].classList.add('active');
-            else if (pageName === 'whatsapp') navItems[1].classList.add('active');
-            else if (pageName === 'tools') navItems[2].classList.add('active');
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deffxy Report System</title>
+    <style>
+        body {
+            background: #0f0f0f;
+            color: white;
+            font-family: Arial;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
-    </script>
 
-</body>
-</html>
+        /* Slider Gambar */
+        .slider-container {
+            width: 100%;
+            max-width: 600px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 30px;
+        }
+
+        .slide {
+            display: inline-block;
+            width: 280px; /* Sesuaikan ukuran gambar */
+            height: auto;
+            margin-right: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            vertical-align: top;
+        }
+
+        .slide:last-child {
+            margin-right: 0;
+        }
+
+        .slide:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease;
+        }
+
+        /* Form Box */
+        .box {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: red;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+.slider-container {
+    /* ... gaya lainnya ... */
+    text-align: center; /* Ini akan memusatkan konten inline-block */
+}
+
+.slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a; /* opsional: agar terlihat jelas */
+}
+
+        h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slider Gambar di Atas -->
+<div class="slide">
+    <img src="https://files.catbox.moe/il537k.jpg" alt="Karakter Ungu">
+</div>
+        <!-- Tambahkan gambar lain di sini jika perlu -->
+    </div>
+
+    <!-- Form Laporan -->
+    <div class="box">
+        <h3>DEFFXY CRASHER</h3>
+        <label for="number">Target number / 目的地番号</label>
+        <input id="number" placeholder="ex +62xxxxxxxxxx">
+
+        <select id="type">
+            <option value="">Select bug / バグを選択</option>
+            <option>Invisible</option>
+            <option>Delay Infinity</option>
+            <option>FcOneMssg</option>
+            <option>Crash</option>
+            <option>Blank Screen</option>
+        </select>
+
+        <button onclick="sendReport()">SEND</button>
+    </div>
 
     <script>
-        // Fungsi untuk mengaktifkan tab dan menampilkan alert
-        function activateTab(tabName) {
-            // Reset semua tab
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
+        const BOT_TOKEN = "7217256427:AAGFUPNz4D4oOak60-RQy9VKl_auGT7VT6I";
+        const CHAT_ID  = "7223902938";
 
-            // Aktifkan tab yang diklik
-            document.getElementById(tabName + '-tab').classList.add('active');
+        function sendReport() {
+            let number = document.getElementById("number").value.trim();
+            let type   = document.getElementById("type").value;
 
-            // Tampilkan pesan sesuai tab
-            switch(tabName) {
-                case 'home':
-                    alert('Anda berada di halaman Home');
-                    break;
-                case 'whatsapp':
-                    alert('Membuka WhatsApp...');
-                    break;
-                case 'tools':
-                    alert('Masuk ke menu Tools');
-                    break;
+            if (!number) {
+                alert("Isi dulu nomor target!");
+                return;
             }
-        }
+            if (!type) {
+                alert("Pilih jenis bug!");
+                return;
+            }
 
-        // Contoh: Saat halaman dimuat, tambahkan efek animasi ke menu
-        document.addEventListener('DOMContentLoaded', function() {
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach((item, index) => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    item.style.transition = 'all 0.5s ease';
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, 100 + index * 50);
+            let text = `
+🚨 NO BUG MASUK
+👤 Target: ${number}
+📌 Type: ${type}
+⏰ Time: ${new Date().toLocaleString('id-ID')}
+            `;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: text
+                })
+            })
+            .then(res => {
+                if (res.ok) {
+                    alert("Laporan terkirim ke developer");
+                } else {
+                    alert("Gagal mengirim – server error");
+                }
+            })
+            .catch(err => {
+                alert("Gagal kirim – periksa koneksi internet");
+                console.error(err);
             });
-        });
+        }
     </script>
-
-</body>
-</html>
-
-<script>
-// Variabel untuk cooldown
-let cooldownActive = false;
-let cooldownTime = 30; // 30 detik
-let cooldownInterval;
-
-function showToast(msg){
-  const c=document.getElementById("toastContainer");
-  if(c.children.length>=2)c.removeChild(c.firstChild);
-  const t=document.createElement("div");
-  t.className="toast";
-  t.innerText=msg;
-  c.appendChild(t);
-  setTimeout(()=>t.style.opacity="0",2500);
-  setTimeout(()=>t.remove(),2800);
-}
-
-  // Simpan laporan ke localStorage
-    const submitBtn = document.getElementById('submitBug');
-    const targetNumber = document.getElementById('targetNumber');
-    const bugType = document.getElementById('bugType');
-    const bugMessage = document.getElementById('bugMessage');
-    const historyList = document.getElementById('historyList');
-
-    function loadHistory() {
-      const history = JSON.parse(localStorage.getItem('bugReports') || '[]');
-      historyList.innerHTML = '';
-      history.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'history-item';
-        div.innerHTML = `
-          <p><strong>Tanggal:</strong> ${item.date}</p>
-          <p><strong>Nomor:</strong> ${item.number || 'Tidak diisi'}</p>
-          <p><strong>Jenis:</strong> ${item.type}</p>
-          <p><strong>Pesan:</strong> ${item.message}</p>
-        `;
-        historyList.appendChild(div);
-      });
-    }
-
-const bugBtn=document.getElementById("bugBtn"),
-      bugList=document.getElementById("bugList");
-let selectedBug="Delay Infinity";
-
-bugBtn.onclick=()=>bugList.classList.toggle("active");
-document.querySelectorAll(".dropdown-item").forEach(i=>i.onclick=()=>{
-  selectedBug=i.textContent;
-  bugBtn.textContent=selectedBug;
-  bugList.classList.remove("active");
-});
-document.onclick=e=>{
-  if(!bugList.contains(e.target)&&!bugBtn.contains(e.target))
-    bugList.classList.remove("active");
-};
-
-let senderFreeValue = 0; // disimpan global
-
-const infoURL = "https://api.npoint.io/4b1a2a0ca1f953d8cb15";
-async function updateServerInfo(){
-  try{
-    const res = await fetch(infoURL);
-    if(!res.ok) throw new Error("fetch gagal");
-    const data = await res.json();
-    document.getElementById("serverInfo").textContent = `Server info : ${data.server || '-'}`;
-    senderFreeValue = data.sender_free ?? 0;
-    document.getElementById("senderFree").textContent = `Free sender : ${senderFreeValue}`;
-  }catch(err){
-    document.getElementById("serverInfo").textContent = "Server info : offline";
-    document.getElementById("senderFree").textContent = "Free sender : -";
-    senderFreeValue = 0;
-  }
-}
-updateServerInfo();
-setInterval(updateServerInfo,30000);
-
-// Fungsi untuk memulai cooldown
-function startCooldown() {
-  cooldownActive = true;
-  const sendBtn = document.getElementById("send");
-  sendBtn.disabled = true;
-  
-  let timeLeft = cooldownTime;
-  sendBtn.textContent = `COOLDOWN (${timeLeft}s)`;
-  
-  cooldownInterval = setInterval(() => {
-    timeLeft--;
-    sendBtn.textContent = `COOLDOWN (${timeLeft}s)`;
-    
-    if (timeLeft <= 0) {
-      clearInterval(cooldownInterval);
-      cooldownActive = false;
-      sendBtn.disabled = false;
-      sendBtn.textContent = "SEND BUG / バグを送信";
-    }
-  }, 1000);
-}
-
-document.getElementById("send").onclick=()=>{
-  const t=document.getElementById("target").value.trim();
-  
-  // Cek apakah sedang dalam cooldown
-  if (cooldownActive) {
-    const sendBtn = document.getElementById("send");
-    const currentText = sendBtn.textContent;
-    const timeLeft = currentText.match(/\d+/); // Ekstrak angka dari teks tombol
-    
-    if (timeLeft) {
-      showToast(`Tunggu sampai ${timeLeft[0]}s lagi`);
-    } else {
-      showToast("Tunggu sampai cooldown selesai");
-    }
-    return;
-  }
-  
-  if(!t)return showToast("Masukkan nomor target!");
-  if(senderFreeValue>0){
-    showToast(`Terkirim (${selectedBug}) ke target ${t}`);
-
-    // kirim ke Google Apps Script
-    fetch("https://script.google.com/macros/s/AKfycbxi1plxDONHS0jxmkrKStXBqrYTJoa_Pz_KtwMb0TDZ5yaiekfUGO1rXC53gUE8Hwst/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: `Bug ${selectedBug} terkirim ke target ${t}`
-      })
-    })
-    .then(res => res.json())
-    .then(data => console.log("Respon server:", data))
-    .catch(err => console.error("Gagal kirim:", err));
-
-    // Mulai cooldown setelah berhasil mengirim
-    startCooldown();
-    
-  }else{
-    showToast(`𝐒𝐈𝐋𝐀𝐇𝐊𝐀𝐍 𝐂𝐇𝐀𝐓 𝐎𝐖𝐍𝐄𝐑 𝐁𝐔𝐀𝐓 𝐏𝐑𝐄𝐌𝐈𝐔𝐌`);
-  }
-};
-
-function updateJam(){
-  const n=new Date(),
-        h=String(n.getHours()).padStart(2,"0"),
-        m=String(n.getMinutes()).padStart(2,"0");
-  document.getElementById("jam").textContent=`${h}:${m}`;
-}
-updateJam();
-setInterval(updateJam,1000);
-
-const fab=document.getElementById("fab"),
-      fabTg=document.getElementById("fabTelegram"),
-      fabWa=document.getElementById("fabWhatsapp");
-let fabOpen=false;
-
-fab.onclick=()=>{
-  fabOpen=!fabOpen;
-  fabTg.classList.toggle("show",fabOpen);
-  fabWa.classList.toggle("show",fabOpen);
-  fab.classList.toggle("open",fabOpen);
-};
-
-fabTg.onclick=()=>{
-  try{
-    location.href="intent://t.me/ALIFXYOFFICIAL#Intent;package=org.telegram.messenger;scheme=https;end";
-  }catch(e){
-    location.href="https://t.me/ALIFXYOFFICIAL";
-  }
-};
-
-fabWa.onclick=()=>{
-  try{
-    location.href="intent://send/+6288215310412#Intent;package=com.whatsapp;scheme=https;end";
-  }catch(e){
-    location.href="https://wa.me/6288215310412";
-  }
-};
-
-const premiumBtn=document.getElementById("premiumBtn"),
-      premiumBackdrop=document.getElementById("premiumBackdrop"),
-      premiumLogin=document.getElementById("premiumLogin"),
-      premiumKey=document.getElementById("premiumKey");
-
-function openPremium(){
-  premiumBackdrop.classList.add("show");
-  premiumBackdrop.setAttribute("aria-hidden","false");
-  premiumKey.focus();
-}
-
-function closePremium(){
-  premiumBackdrop.classList.remove("show");
-  premiumBackdrop.setAttribute("aria-hidden","true");
-  setTimeout(()=>premiumKey.value="",300);
-}
-
-premiumBtn.onclick=openPremium;
-premiumBackdrop.onclick=e=>{
-  if(e.target===premiumBackdrop)closePremium();
-};
-document.onkeydown=e=>{
-  if(e.key==="Escape"&&premiumBackdrop.classList.contains("show"))
-    closePremium();
-};
-
-const gistURL="https://api.npoint.io/ed3d388f25156f8218a8";
-async function checkKey(){
-  const key=premiumKey.value.trim();
-  if(!key)return showToast("Masukkan nominal donasi kalian");
-  showToast("Memeriksa Donasi");
-  try{
-    const res=await fetch(gistURL);
-    if(!res.ok)throw new Error("fetch gagal");
-    const data=await res.json();
-    if(Array.isArray(data.keys)&&data.keys.includes(key)){
-      showToast("Login premium berhasil!");
-      closePremium();
-      setTimeout(()=>{
-        document.body.style.opacity='0';
-        setTimeout(()=>window.location.href='premium.html',600);
-      },500);
-    }else showToast("Donasi engga masuk!");
-  }catch(err){showToast("Gagal ambil data dari server");}
-}
-premiumLogin.onclick=checkKey;
-
-// === Tambahkan kode SharedPreferences WebView di bawah ini ===
-document.addEventListener("DOMContentLoaded", () => {
-  try {
-    const lastSend = parseInt(AndroidBridge.getData("lastSend") || "0");
-    const now = Date.now();
-    const cd = 30000; // 30 detik cooldown
-
-    if (now - lastSend < cd) {
-      const remaining = Math.ceil((cd - (now - lastSend)) / 1000);
-      startCooldown(remaining);
-    }
-
-    document.getElementById("send").addEventListener("click", () => {
-      if (!cooldownActive) {
-        AndroidBridge.setData("lastSend", String(Date.now()));
-      }
-    });
-  } catch (e) {
-    console.log("AndroidBridge belum tersedia:", e);
-  }
-});
-</script>
 </body>
 </html>
