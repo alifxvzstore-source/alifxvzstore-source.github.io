@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Home</title>
     <style>
         body {
@@ -37,26 +37,42 @@
             color: white;
         }
 
+        #error {
+            color: #ff5555;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
         .login-container button {
             background: #ff3333;
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 12px 30px;            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
         }
 
-        /* Konten Utama (setelah login) */        .main-content {
+        /* Konten Utama (setelah login) */
+        .main-content {
             flex-grow: 1;
             padding: 20px;
             text-align: center;
-            display: none; /* Sembunyikan dulu */
+            display: none;
         }
 
         .welcome {
             font-size: 24px;
             margin-bottom: 20px;
+        }
+
+        .logout-btn {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
         }
 
         /* Menu Navigasi Bawah */
@@ -80,8 +96,7 @@
             align-items: center;
             cursor: pointer;
             color: #cccccc;
-            transition: all 0.3s ease;
-            padding: 8px 16px;
+            transition: all 0.3s ease;            padding: 8px 16px;
             border-radius: 8px;
         }
 
@@ -96,7 +111,8 @@
         }
 
         .nav-text {
-            font-size: 14px;            font-weight: 500;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .nav-item.active {
@@ -112,14 +128,16 @@
     </style>
 </head>
 <body>
-    <!-- Form Login -->
+    <!-- Halaman Login -->
     <div id="loginPage" class="login-container">
         <h2>Login</h2>
         <input type="text" id="username" placeholder="Username" autocomplete="off" />
         <input type="password" id="password" placeholder="Password" />
+        <div id="error"></div>
         <button onclick="login()">Masuk</button>
     </div>
-
+    
+    
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -192,27 +210,12 @@
         </video>
         <div class="watermark">DeffXy Crasher</div>
     </div>
-
-    <!-- Konten Utama (Setelah Login) -->
+    <!-- Halaman Utama (Setelah Login) -->
     <div id="mainPage" class="main-content">
         <div class="welcome">Selamat datang, <span id="displayName">User</span>!</div>
         <p>Kamu sudah login. Navigasi tersedia di bawah.</p>
-        <body>
-        <body>
-  <button class="logout-btn" onclick="logout()">Logout</button>
-
-  <script>
-    function logout() {
-      // Hapus data login (misal dari localStorage)
-      localStorage.removeItem("loggedInUser");
-      
-      // Arahkan ke halaman login atau refresh
-      window.location.href = "index.html"; // ganti dengan nama file login kamu
-      // atau cukup: location.reload();
-    }
-  </script>
-</body>
-            <!DOCTYPE html>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+        <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -230,22 +233,8 @@
 </html>
     </div>
 
-  <script>
-    function confirmLogout() {
-      if (confirm("Apakah Anda yakin ingin logout?")) {
-        // Di sini biasanya kamu arahkan ke halaman logout atau kirim request ke server
-        alert("Anda telah logout.");
-        // Contoh redirect: window.location.href = "/logout";
-      }
-    }
-  </script>
-
-</body>
-</html>
-
-    <!-- Menu Navigasi Bawah (Hanya muncul setelah login) -->
-    <div id="bottomNav" class="bottom-nav" style="display: none;">
-        <div class="nav-item active">
+    <!-- Menu Navigasi Bawah -->
+    <div id="bottomNav" class="bottom-nav" style="display: none;">        <div class="nav-item active">
             <span class="nav-icon icon-home"></span>
             <span class="nav-text">Home</span>
         </div>
@@ -262,37 +251,43 @@
             <span class="nav-text">Tools</span>
         </div>
         <div class="nav-item" onclick="window.location.href='bokep.html'">
-            <span class="nav-icon icon-bokep"></span>            <span class="nav-text">Nonton</span>
+            <span class="nav-icon icon-bokep"></span>
+            <span class="nav-text">Nonton</span>
         </div>
     </div>
 
     <script>
-        // Cek apakah sudah login sebelumnya
+        // 👇 Daftar user yang diizinkan (bisa ditambah sesuai kebutuhan)
+        const validUsers = {
+            "DeffXy": "1",
+            "Anna": "nurse123",
+            "Admin": "admin123",
+            "User1": "pass1",
+            "User2": "pass2"
+        };
+
+        // Cek apakah sudah login saat halaman dimuat
         window.onload = function () {
             const savedUser = localStorage.getItem("loggedInUser");
-            if (savedUser) {
+            if (savedUser && validUsers[savedUser] !== undefined) {
                 showMainPage(savedUser);
             } else {
                 showLoginPage();
             }
         };
 
-    function login() {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const errorDiv = document.getElementById("error");
+        function login() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value;
+            const errorDiv = document.getElementById("error");
 
-      // Ganti dengan username & password yang kamu inginkan
-      if (username === "DeffXy" && password === "1") {
-        // Simpan ke localStorage (tanpa enkripsi untuk demo sederhana)
-            localStorage.setItem("loggedInUser", username);
-
-            // Tampilkan halaman utama
-            showMainPage(username);
-      } else {
-        errorDiv.textContent = "Username atau password salah!";
-      }
-    }
+            if (validUsers[username] === password) {
+                localStorage.setItem("loggedInUser", username);
+                showMainPage(username);                errorDiv.textContent = "";
+            } else {
+                errorDiv.textContent = "Username atau password salah!";
+            }
+        }
 
         function showMainPage(username) {
             document.getElementById("loginPage").style.display = "none";
@@ -307,8 +302,10 @@
             document.getElementById("bottomNav").style.display = "none";
         }
 
-        // Opsional: logout dengan hapus data
-        // Tambahkan tombol logout jika diperlukan
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            showLoginPage();
+        }
     </script>
 </body>
 </html>
