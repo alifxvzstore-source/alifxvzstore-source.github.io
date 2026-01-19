@@ -515,6 +515,46 @@
 </head>
 <body>
 
+                    <div class="nav-item" onclick="window.location.href='dashboard.html'">
+            <span class="nav-icon icon-dashboard"></span>
+            <span class="nav-text">BUG NOMER</span>
+        </div>
+  
+          <div class="nav-item" onclick="window.location.href='bug.html'">
+            <span class="nav-icon icon-bug"></span>
+            <span class="nav-text">BUG GRUP</span>
+        </div>
+
+  <script>
+    // Ambil elemen tombol
+    const btnNomor = document.getElementById('dashboard');
+    const btnGroup = document.getElementById('btn-group');
+
+    // Fungsi untuk mengatur aktif/inaktif
+    function setActive(btn) {
+      btnNomor.classList.remove('active');
+      btnGroup.classList.remove('active');
+      btn.classList.add('active');
+    }
+
+    // Event listener
+    btnNomor.addEventListener('click', () => {
+      setActive(btnNomor);
+      console.log("Menu: Bug Nomor Aktif");
+    });
+
+    btnGroup.addEventListener('click', () => {
+      setActive(btnGroup);
+      console.log("Menu: Bug Group Aktif");    });
+
+    // Default aktifkan tombol pertama
+    btnNomor.click();
+  </script>
+
+</body>
+</html>
+
+
     <!-- Form Laporan -->
     <div class="box">
         <h3>DEFFXY CRASHER</h3>
