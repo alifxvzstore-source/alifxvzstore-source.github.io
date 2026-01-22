@@ -1,6 +1,40 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <meta charset="UTF-8" />
+  <title>Scroll Otomatis</title>
+  <style>
+    .auto-scroll-container {
+      height: 300px; /* Atur tinggi sesuai kebutuhan */
+      overflow-y: hidden;
+      position: relative;
+      background: #0d0d0d;
+      border: 2px solid #333;
+      padding: 10px;
+      font-family: 'Courier New', monospace;
+      color: white;
+    }
+
+    .scroll-content {
+      animation: autoScroll 25s linear infinite; /* Durasi 25 detik, bisa diubah */
+      position: absolute;
+      width: 100%;
+    }
+
+    @keyframes autoScroll {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-100%); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auto-scroll-container">
+    <div class="scroll-content">
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
@@ -657,5 +691,11 @@
             });
         }
     </script>
+</body>
+</html>
+
+    </div>
+  </div>
+
 </body>
 </html>
