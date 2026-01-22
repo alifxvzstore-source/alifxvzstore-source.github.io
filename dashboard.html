@@ -2,10 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Scroll Otomatis</title>
+  <title>Scroll Otomatis - Lebar Otomatis</title>
   <style>
     .auto-scroll-container {
-      height: 300px; /* Atur tinggi sesuai kebutuhan */
+      /* Lebar otomatis sesuai isi */
+      display: inline-block;
+      max-width: 95vw;        /* Jangan lebih dari 95% layar */
+      width: fit-content;     /* Ikut lebar konten */
+      height: 300px;
       overflow-y: hidden;
       position: relative;
       background: #0d0d0d;
@@ -13,17 +17,28 @@
       padding: 10px;
       font-family: 'Courier New', monospace;
       color: white;
+      margin: 20px auto;      /* Tengahin */
+      box-sizing: border-box;
     }
 
     .scroll-content {
-      animation: autoScroll 25s linear infinite; /* Durasi 25 detik, bisa diubah */
+      animation: autoScroll 25s linear infinite;
       position: absolute;
       width: 100%;
+      white-space: nowrap;    /* Biar teks panjang gak pindah baris (opsional) */
     }
 
     @keyframes autoScroll {
       from { transform: translateY(0); }
       to   { transform: translateY(-100%); }
+    }
+
+    /* Responsif: di HP, jangan kepotong */
+    @media (max-width: 480px) {
+      .auto-scroll-container {
+        width: 95vw !important;
+        white-space: normal;
+      }
     }
   </style>
 </head>
@@ -31,6 +46,7 @@
 
   <div class="auto-scroll-container">
     <div class="scroll-content">
+     
 
 <!DOCTYPE html>
 <html lang="id">
