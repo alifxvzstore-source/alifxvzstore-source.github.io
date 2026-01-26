@@ -47,8 +47,7 @@
         .icons {
             display: flex;
             gap: 20px;
-        }
-        .icon {
+        }        .icon {
             font-size: 24px;
             cursor: pointer;
         }
@@ -96,8 +95,8 @@
 
         .dashboard-title {
             font-size: 24px;
-            font-weight: bold;            margin-bottom: 20px;
-        }
+            font-weight: bold;
+            margin-bottom: 20px;        }
 
         .stats-row {
             display: flex;
@@ -145,8 +144,8 @@
             margin-top: 10px;
         }
 
-        .news-image {            width: 100%;
-            height: 200px;
+        .news-image {
+            width: 100%;            height: 200px;
             object-fit: cover;
             position: relative;
         }
@@ -194,8 +193,8 @@
         }
 
         .account-icon {
-            width: 50px;            height: 50px;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -243,8 +242,8 @@
             font-weight: bold;
             color: #ff922b;
         }
-        /* Slider Gambar */
-        .slider-container {
+
+        /* Slider Gambar */        .slider-container {
             width: 100%;
             max-width: 100%;
             overflow-x: auto;
@@ -263,6 +262,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: transform 0.2s ease;
+            /* Menambahkan border ungu di sekeliling gambar */
+            border: 4px solid #9d4edd; /* Warna ungu sesuai tema */
         }
 
         .slide:last-child {
@@ -291,8 +292,8 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            z-index: 1000;
-            border-top: 2px solid #ff3333;        }
+            z-index: 1000;            border-top: 2px solid #ff3333;
+        }
 
         .nav-item {
             display: flex;
@@ -340,8 +341,8 @@
         .icon-calendar::before { content: "📅"; }
         .icon-grid::before { content: "🟥🟦"; }
 
-        /* Role color */
-        .role-owner {            color: #ff5555;
+        /* Role color */        .role-owner {
+            color: #ff5555;
             font-weight: bold;
         }
 
@@ -389,8 +390,8 @@
 
             .nav-text {
                 font-size: 12px;
-            }
-        }    </style>
+            }        }
+    </style>
 </head>
 <body>
 
@@ -438,8 +439,8 @@
         <div class="section-title">Latest News</div>
         <div class="news-card">
             <img src="https://autoresbot.com/tmp_files/1c6c647d-2a67-4246-ab20-d2b3f2d7e344.jpg" alt="News Image" class="news-image">
-            <div class="news-overlay">
-                <div class="news-title">DeffXy</div>                <div class="news-desc">Buy Access Chat @ALIFXYOFFICIAL</div>
+            <div class="news-overlay">                <div class="news-title">DeffXy</div>
+                <div class="news-desc">Buy Access Chat @ALIFXYOFFICIAL</div>
             </div>
         </div>
 
@@ -487,8 +488,8 @@
             <span class="nav-icon icon-home"></span>
             <span class="nav-text">Home</span>
         </div>
-        <div class="nav-item active">
-            <span class="nav-icon icon-whatsapp"></span>            <span class="nav-text">WhatsApp</span>
+        <div class="nav-item active">            <span class="nav-icon icon-whatsapp"></span>
+            <span class="nav-text">WhatsApp</span>
         </div>
         <div class="nav-item" onclick="window.location.href='dashboard.html'">
             <span class="nav-icon icon-bug-system"></span>
