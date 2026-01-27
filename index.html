@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>DeffXy Crasher</title>
     <style>
+        /* === GLOBAL STYLE === */
+        :root {
+            --primary-purple: #9c27b0;       /* Deep purple */
+            --light-purple: #e1bee7;         /* Light purple for text */
+            --dark-purple: #4a148c;          /* Darker purple for bg */
+            --purple-gradient: linear-gradient(90deg, #9c27b0, #673ab7);
+        }
+
         body {
             background-color: #121212;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -15,10 +23,10 @@
             align-items: center;
             min-height: 100vh;
             color: white;
-            overflow: hidden; /* Agar tidak ada scroll saat loading */
+            overflow: hidden;
         }
 
-        /* Loading Screen */
+        /* === LOADING SCREEN === */
         #loadingScreen {
             position: fixed;
             top: 0;
@@ -37,15 +45,16 @@
         .loading-container {
             text-align: center;
             padding: 2rem;
-            border: 1px solid #333;
+            border: 1px solid var(--primary-purple);
             border-radius: 10px;
-            max-width: 400px;
+            max-width: 400px;            background: rgba(30, 30, 30, 0.9);
         }
 
         .loading-title {
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
             letter-spacing: 3px;
+            color: var(--light-purple);
         }
         .loading-subtitle {
             font-size: 0.9rem;
@@ -64,7 +73,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            background: var(--purple-gradient);
             width: 0%;
             transition: width 3s ease-in-out;
         }
@@ -75,28 +84,27 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .loading-step i {
-            font-size: 1rem;
+            color: var(--light-purple);
         }
 
         .redirect-text {
             font-size: 1.5rem;
             margin-top: 1.5rem;
             font-weight: bold;
+            color: var(--primary-purple);
         }
 
-        /* Login Form */
-        #loginForm {
-            display: none; /* Sembunyikan dulu */
-            width: 100%;
+        /* === LOGIN FORM === */
+        #loginPage {
+            display: none;            width: 100%;
             max-width: 350px;
             padding: 2rem;
             background-color: rgba(30, 30, 30, 0.8);
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            z-index: 100;            animation: fadeIn 0.8s ease-in-out;
+            z-index: 100;
+            animation: fadeIn 0.8s ease-in-out;
+            border: 2px solid var(--primary-purple);
         }
 
         @keyframes fadeIn {
@@ -109,6 +117,7 @@
             font-size: 2rem;
             margin-bottom: 1.5rem;
             letter-spacing: 2px;
+            color: var(--light-purple);
         }
 
         .input-group {
@@ -118,7 +127,7 @@
         input {
             width: 100%;
             padding: 0.75rem;
-            border: 1px solid #444;
+            border: 1px solid #6a1b9a;
             border-radius: 8px;
             background-color: #222;
             color: white;
@@ -128,200 +137,71 @@
 
         input:focus {
             outline: none;
-            border-color: #007bff;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 2px rgba(156, 39, 176, 0.3);
         }
 
         button {
             width: 100%;
             padding: 0.75rem;
             border: none;
-            border-radius: 8px;
-            background-color: #ff4444;
+            border-radius: 8px;            background: var(--purple-gradient);
             color: white;
             font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
             margin-top: 1rem;
+            font-weight: bold;
         }
 
         button:hover {
-            background-color: #ff6666;        }
-
-        .play-button {
-            width: 100%;
-            margin-top: 1rem;
-            padding: 0.75rem;
-            border-radius: 8px;
-            background-color: #666;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .play-button:hover {
-            background-color: #888;
-        }
-
-        .play-icon {
-            font-size: 2rem;
-        }
-
-        .play-text {
-            font-size: 0.9rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen">
-        <div class="loading-container">
-            <div class="loading-title">DEFFXY CRASH</div>
-            <div class="loading-subtitle">Initializing System Components...</div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="loading-step"><i>⚙️</i> Starting Server</div>
-            <div class="loading-step"><i>💾</i> Loading Core Modules...</div>
-            <div class="loading-step"><i>🛡️</i> Initializing Protocols...</div>
-            <div class="loading-step"><i>🔗</i> Connecting Database...</div>
-            <div class="loading-step"><i>✅</i> System Ready!</div>
-            <div class="redirect-text" id="redirectText">Redirecting in 3...</div>
-        </div>
-    </div>
- 
-
-    <script>
-        // Simulasikan proses loading
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const loginForm = document.getElementById('loginForm');
-            const progressFill = document.getElementById('progressFill');
-            const redirectText = document.getElementById('redirectText');
-
-            // Animasi progress bar
-            let progress = 0;
-            const interval = setInterval(() => {
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    // Setelah loading selesai, sembunyikan loading screen dan tampilkan form
-                    setTimeout(() => {
-                        loadingScreen.style.opacity = '0';
-                        setTimeout(() => {
-                            loadingScreen.style.display = 'none';
-                            loginForm.style.display = 'block';
-                        }, 500);
-                    }, 500);
-                } else {
-                    progress += 5;
-                    progressFill.style.width = progress + '%';
-                }
-            }, 150);
-
-            // Timer redirect (hanya untuk tampilan)
-            let countdown = 3;
-            const timer = setInterval(() => {
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    redirectText.textContent = 'Redirecting...';
-                } else {                    redirectText.textContent = `Redirecting in ${countdown}...`;
-                    countdown--;
-                }
-            }, 1000);
-        });
-    </script>
-</body>
-</html>
-
-
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Home</title>
-    <style>
-        body {
-            background-color: #121212;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow-x: hidden;
-            color: white;
-        }
-
-        /* Halaman Login */
-        .login-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            gap: 15px;
-        }
-
-        .login-container input {
-            width: 80%;
-            max-width: 300px;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            background: #1e1e1e;
-            color: white;
+            background: linear-gradient(90deg, #673ab7, #9c27b0);
+            transform: scale(1.02);
         }
 
         #error {
             color: #ff5555;
             font-size: 14px;
             min-height: 20px;
-        }
-
-        .login-container button {
-            background: #ff3333;
-            color: white;
-            border: none;
-            padding: 12px 30px;            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* Konten Utama (setelah login) */
-        .main-content {
-            flex-grow: 1;
-            padding: 20px;
             text-align: center;
+        }
+
+        /* === MAIN CONTENT === */
+        .main-content {
             display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
         }
 
         .welcome {
             font-size: 24px;
             margin-bottom: 20px;
+            color: var(--light-purple);
         }
 
         .logout-btn {
-            background: #444;
+            background: var(--dark-purple);
             color: white;
             border: none;
             padding: 8px 16px;
             border-radius: 6px;
             cursor: pointer;
             margin-top: 20px;
+            transition: background 0.3s;
         }
 
-        /* Menu Navigasi Bawah */
+        .logout-btn:hover {            background: var(--primary-purple);
+        }
+
+        /* === BOTTOM NAVIGATION === */
         .bottom-nav {
             width: 100%;
-            background-color: #2a2a2a;
-            display: flex;
+            background-color: #1e1e1e;
+            display: none;
             justify-content: space-around;
             padding: 12px 0;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
@@ -329,7 +209,7 @@
             bottom: 0;
             left: 0;
             z-index: 1000;
-            border-top: 2px solid #ff3333;
+            border-top: 2px solid var(--primary-purple);
         }
 
         .nav-item {
@@ -338,13 +218,19 @@
             align-items: center;
             cursor: pointer;
             color: #cccccc;
-            transition: all 0.3s ease;            padding: 8px 16px;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
             border-radius: 8px;
         }
 
         .nav-item:hover,
         .nav-item.active {
-            color: #ff3333;
+            color: var(--light-purple);
+            transform: scale(1.1);
+        }
+
+        .nav-item.active {
+            background-color: rgba(156, 39, 176, 0.2);
         }
 
         .nav-icon {
@@ -357,55 +243,21 @@
             font-weight: 500;
         }
 
-        .nav-item.active {
-            background-color: rgba(255, 51, 51, 0.1);
-            transform: scale(1.05);
-        }
-
-        .icon-home::before { content: "🏠"; }
+        /* === ICONS === */        .icon-home::before { content: "🏠"; }
         .icon-whatsapp::before { content: "💬"; }
         .icon-dashboard::before { content: "👻"; }
         .icon-tools::before { content: "⚙️"; }
         .icon-bokep::before { content: "🥵"; }
-    </style>
-</head>
-<body>
-    <!-- Halaman Login -->
-    <div id="loginPage" class="login-container">
-        <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username" autocomplete="off" />
-        <input type="password" id="password" placeholder="Password" />
-        <div id="error"></div>
-        <button onclick="login()">Masuk</button>
-    </div>
-    
-    
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DeffXy Crasher</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            touch-action: none;
-        }
 
+        /* === VIDEO & AUDIO PLAYER (opsional) === */
         .video-container.slide {
             width: 100%;
-            max-width: 200px; /* 👈 INI YANG PENTING — BATAS LEBAR VIDEO */
+            max-width: 200px;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(156, 39, 176, 0.5);
             position: relative;
+            margin-top: 20px;
         }
 
         .video-container.slide video {
@@ -422,64 +274,74 @@
             left: 50%;
             transform: translateX(-50%);
             color: #ffffff;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Courier New', monospace;
             font-size: 18px;
-            text-shadow: 0 0 5px #9900ff, 0 0 10px #9900ff;
+            text-shadow: 0 0 5px #9c27b0, 0 0 10px #9c27b0;
             z-index: 10;
-            text-align: center;
             width: 100%;
         }
-        @media (max-width: 480px) {
-            .video-container.slide {
-                max-width: 160px; /* Lebih kecil di HP */
-            }
+
+        audio {
+            margin-top: 20px;
+            width: 90%;
+            max-width: 300px;
+            border-radius: 8px;
+            background: #222;
+            border: 1px solid var(--primary-purple);
         }
     </style>
 </head>
 <body>
-    <div class="video-container slide">
-        <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline
-            preload="auto"
-            disablepictureinpicture
-            controlsList="nodownload nofullscreen noremoteplayback"
-        >
-            <source src="https://github.com/alifxvzstore-source/my-video-host/raw/refs/heads/main/1768745018979.mp4">
-            Browser Anda tidak mendukung video.
-        </video>
-        <div class="watermark">DeffXy Crasher</div>
+    <!-- Loading Screen -->    <div id="loadingScreen">
+        <div class="loading-container">
+            <div class="loading-title">DEFFXY CRASH</div>
+            <div class="loading-subtitle">Initializing System Components...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="loading-step"><i>⚙️</i> Starting Server</div>
+            <div class="loading-step"><i>💾</i> Loading Core Modules...</div>
+            <div class="loading-step"><i>🛡️</i> Initializing Protocols...</div>
+            <div class="loading-step"><i>🔗</i> Connecting Database...</div>
+            <div class="loading-step"><i>✅</i> System Ready!</div>
+            <div class="redirect-text" id="redirectText">Redirecting in 3...</div>
+        </div>
     </div>
-    <!-- Halaman Utama (Setelah Login) -->
+
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <h2 class="form-title">Login</h2>
+        <input type="text" id="username" placeholder="Username" autocomplete="off" />
+        <input type="password" id="password" placeholder="Password" />
+        <div id="error"></div>
+        <button onclick="login()">Masuk</button>
+    </div>
+
+    <!-- Main Content (after login) -->
     <div id="mainPage" class="main-content">
         <div class="welcome">Selamat datang, <span id="displayName">User</span>!</div>
-        <p>Kamu sudah login. Navigasi tersedia di bawah.</p>
+        <p>Sistem berhasil dimuat. Navigasi tersedia di bawah.</p>
+
+        <!-- Video Mini -->
+        <div class="video-container slide">
+            <video autoplay muted loop playsinline preload="auto" disablepictureinpicture controlsList="nodownload nofullscreen noremoteplayback">
+                <source src="https://github.com/alifxvzstore-source/my-video-host/raw/refs/heads/main/1768745018979.mp4" type="video/mp4">
+                Browser Anda tidak mendukung video.
+            </video>
+            <div class="watermark">DeffXy Crasher</div>
+        </div>
+
+        <!-- Audio Player -->
+        <audio id="myAudio" src="https://files.cloudkuimages.guru/audios/0e45e7fd21d6.mp3" controls preload="none"></audio>
+
         <button class="logout-btn" onclick="logout()">Logout</button>
-        <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Putar Musik dari Link</title>
-</head>
-<body>
-
-  <h2>Player Musik Online</h2>
-  
-  <!-- Ganti URL di bawah ini dengan link musikmu -->
-  <audio id="myAudio" src="https://files.cloudkuimages.guru/audios/0e45e7fd21d6.mp3" controls preload="none"></audio>
-
-
-</body>
-</html>
     </div>
 
-    <!-- Menu Navigasi Bawah -->
-    <div id="bottomNav" class="bottom-nav" style="display: none;">        <div class="nav-item active">
+    <!-- Bottom Navigation -->
+    <div id="bottomNav" class="bottom-nav">
+        <div class="nav-item active">
             <span class="nav-icon icon-home"></span>
-            <span class="nav-text">Home</span>
-        </div>
+            <span class="nav-text">Home</span>        </div>
         <div class="nav-item" onclick="window.location.href='whatsapp.html'">
             <span class="nav-icon icon-whatsapp"></span>
             <span class="nav-text">WhatsApp</span>
@@ -499,22 +361,59 @@
     </div>
 
     <script>
-        // 👇 Daftar user yang diizinkan (bisa ditambah sesuai kebutuhan)
+        // Daftar user valid
         const validUsers = {
-            "DeffXy": "Drax",
-            
+            "DeffXy": "1",
+            "Nelzz": "123", 
+            "AGUSXALIP": "AGUSXALIP", 
+            "jull": "ganteng",
+            "yaaz": "blue", 
+            "irsad": "irsad", 
+            "fik": "Phhiop122", 
         };
 
-        // Cek apakah sudah login saat halaman dimuat
-        window.onload = function () {
-            const savedUser = localStorage.getItem("loggedInUser");
-            if (savedUser && validUsers[savedUser] !== undefined) {
-                showMainPage(savedUser);
-            } else {
-                showLoginPage();
-            }
-        };
+        // Simulasi loading → login
+        document.addEventListener('DOMContentLoaded', function () {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const loginForm = document.getElementById('loginPage');
+            const progressFill = document.getElementById('progressFill');
+            const redirectText = document.getElementById('redirectText');
 
+            let progress = 0;
+            const interval = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            // Cek apakah sudah login
+                            const savedUser = localStorage.getItem("loggedInUser");
+                            if (savedUser && validUsers[savedUser] !== undefined) {
+                                showMainPage(savedUser);                            } else {
+                                loginForm.style.display = 'block';
+                            }
+                        }, 500);
+                    }, 500);
+                } else {
+                    progress += 5;
+                    progressFill.style.width = progress + '%';
+                }
+            }, 150);
+
+            let countdown = 3;
+            const timer = setInterval(() => {
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    redirectText.textContent = 'Redirecting...';
+                } else {
+                    redirectText.textContent = `Redirecting in ${countdown}...`;
+                    countdown--;
+                }
+            }, 1000);
+        });
+
+        // Fungsi login
         function login() {
             const username = document.getElementById("username").value.trim();
             const password = document.getElementById("password").value;
@@ -522,7 +421,8 @@
 
             if (validUsers[username] === password) {
                 localStorage.setItem("loggedInUser", username);
-                showMainPage(username);                errorDiv.textContent = "";
+                showMainPage(username);
+                errorDiv.textContent = "";
             } else {
                 errorDiv.textContent = "Username atau password salah!";
             }
@@ -530,21 +430,18 @@
 
         function showMainPage(username) {
             document.getElementById("loginPage").style.display = "none";
-            document.getElementById("mainPage").style.display = "block";
+            document.getElementById("mainPage").style.display = "flex";
             document.getElementById("bottomNav").style.display = "flex";
             document.getElementById("displayName").textContent = username;
         }
 
-        function showLoginPage() {
-            document.getElementById("loginPage").style.display = "flex";
-            document.getElementById("mainPage").style.display = "none";
-            document.getElementById("bottomNav").style.display = "none";
-        }
-
         function logout() {
             localStorage.removeItem("loggedInUser");
-            showLoginPage();
+            document.getElementById("mainPage").style.display = "none";
+            document.getElementById("bottomNav").style.display = "none";
+            document.getElementById("loginPage").style.display = "block";            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
         }
     </script>
 </body>
-</html>
+    </html>
