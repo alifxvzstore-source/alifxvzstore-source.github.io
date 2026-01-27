@@ -3,288 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeffXy Dashboard</title>
+    <title>WhatsApp</title>
     <style>
-        * {
+        body {
+            background-color: #121212;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #0f021a;
-            color: white;
+            display: flex;
+            flex-direction: column;
             height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            background-color: #0f021a;
-            z-index: 1000;
-        }
-
-        .menu-icon {
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .app-title {
-            font-size: 22px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .icons {
-            display: flex;
-            gap: 20px;
-        }        .icon {
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        /* Konten Utama - Mengisi sisa ruang */
-        .main-content {
+        .content {
             flex-grow: 1;
-            overflow-y: auto;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* Dashboard Card */
-        .dashboard-card {
-            background: linear-gradient(135deg, #7b2cbf, #9d4edd);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        .welcome {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .welcome-icon {
-            background: rgba(255,255,255,0.2);
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .welcome-text {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .dashboard-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;        }
-
-        .stats-row {
-            display: flex;
-            gap: 15px;
-        }
-
-        .stat-box {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 15px;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .stat-icon {
-            font-size: 20px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        .stat-value {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        /* Section Title */
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-
-        /* News Cards */
-        .news-card {
-            background: #1a0529;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            margin-top: 10px;
-        }
-
-        .news-image {
-            width: 100%;            height: 200px;
-            object-fit: cover;
-            position: relative;
-        }
-
-        .news-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 15px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-        }
-
-        .news-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .news-desc {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        /* Account Statistics */
-        .account-stats {
-            margin-top: 30px;
-        }
-
-        .account-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .account-box {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 15px;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .account-icon {
-            width: 50px;
-            height: 50px;            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .account-label {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        .account-value {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .account-expire {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .expire-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: #ff922b;
-        }
-
-        .expire-label {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        .expire-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff922b;
-        }
-
-        /* Slider Gambar */        .slider-container {
-            width: 100%;
-            max-width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 10px 0;
-            border: none;
-            border-radius: 10px;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .slide {
-            display: inline-block;
-            width: 100%;
-            height: auto;
-            margin-right: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: transform 0.2s ease;
-            /* Menambahkan border ungu di sekeliling gambar */
-            border: 4px solid #9d4edd; /* Warna ungu sesuai tema */
-        }
-
-        .slide:last-child {
-            margin-right: 0;
-        }
-
-        .slide:hover {
-            transform: scale(1.02);
-        }
-
-        .slider-caption {
+            color: white;
             text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        /* Bottom Navigation Bar */
         .bottom-nav {
             width: 100%;
-            background-color: #120420;
+            background-color: #2a2a2a;
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
@@ -292,7 +37,8 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            z-index: 1000;            border-top: 2px solid #ff3333;
+            z-index: 1000;
+            border-top: 2px solid #ff3333;
         }
 
         .nav-item {
@@ -326,36 +72,11 @@
             transform: scale(1.05);
         }
 
-        /* Custom Icons */
         .icon-home::before { content: "🏠"; }
         .icon-whatsapp::before { content: "💬"; }
         .icon-bug-system::before { content: "👻"; }
         .icon-tools::before { content: "⚙️"; }
-        .icon-menu::before { content: "☰"; }
-        .icon-bell::before { content: "🔔"; }
-        .icon-user::before { content: "👤"; }
-        .icon-users::before { content: "👥"; }
-        .icon-link::before { content: "🔗"; }
-        .icon-person::before { content: "👤"; }
-        .icon-shield::before { content: "🛡️"; }
-        .icon-calendar::before { content: "📅"; }
-        .icon-grid::before { content: "🟥🟦"; }
 
-        /* Role color */        .role-owner {
-            color: #ff5555;
-            font-weight: bold;
-        }
-
-        /* Status colors */
-        .online-users {
-            color: #50fa7b;
-        }
-
-        .connections {
-            color: #ffb86c;
-        }
-
-        /* Android Navigation Bar (Opsional) */
         .android-navigation {
             width: 100%;
             background-color: #000;
@@ -373,122 +94,521 @@
             font-size: 20px;
             padding: 5px 15px;
         }
-
-        /* Media Query untuk Mobile */
-        @media (max-width: 768px) {
-            .main-content {
-                padding: 15px;
-            }
-
-            .dashboard-card {
-                padding: 15px;
-            }
-
-            .news-image {
-                height: 180px;
-            }
-
-            .nav-text {
-                font-size: 12px;
-            }        }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <div class="menu-icon icon-menu"></div>
-        <div class="app-title">DeffXy</div>
-        <div class="icons">
-            <div class="icon icon-bell"></div>
-            <div class="icon icon-user"></div>
+    <!-- Konten WhatsApp -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DarkVerse Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0f021a;
+      color: white;
+      padding: 15px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .app-title {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .icons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .dashboard-card {
+      background: linear-gradient(135deg, #7b2cbf, #9d4edd);
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .welcome {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .welcome-icon {
+      background: rgba(255,255,255,0.2);
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .welcome-text {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .dashboard-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 15px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-icon {
+      font-size: 20px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .news-card {
+      background: #1a0529;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    .news-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      position: relative;
+    }
+
+    .news-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    }
+
+    .news-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .news-desc {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .account-stats {
+      margin-top: 30px;
+    }
+
+    .account-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .account-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 15px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .account-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .account-label {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .account-value {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .account-expire {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .expire-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #ff922b;
+    }
+
+    .expire-label {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .expire-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff922b;
+    }
+
+    .quick-actions {
+      margin-top: 30px;
+      padding: 15px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .action-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .action-item:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .action-icon {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .action-label {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* Custom Icons */
+    .icon-home::before { content: "🏠"; }
+    .icon-whatsapp::before { content: "💬"; }
+    .icon-tools::before { content: "🔧"; }
+    .icon-anime::before { content: "🎬"; }
+    .icon-menu::before { content: "☰"; }
+    .icon-bell::before { content: "🔔"; }
+    .icon-user::before { content: "👤"; }
+    .icon-users::before { content: "👥"; }
+    .icon-link::before { content: "🔗"; }
+    .icon-person::before { content: "👤"; }
+    .icon-shield::before { content: "🛡️"; }
+    .icon-calendar::before { content: "📅"; }
+    .icon-grid::before { content: "🟥🟦"; }
+
+    /* Role color */
+    .role-owner {
+      color: #ff5555;
+      font-weight: bold;
+    }
+
+    /* Status colors */
+    .online-users {
+      color: #50fa7b;
+    }
+
+    .connections {
+      color: #ffb86c;
+    }
+
+    /* Footer navigation bar (simulated) */
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #120420;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px;
+      cursor: pointer;
+      color: #9d4edd;
+    }
+
+    .nav-item.active {
+      color: #ff5555;
+    }
+
+    .nav-icon {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .nav-label {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="menu-icon icon-menu"></div>
+    <div class="app-title">DeffXy</div>
+    <div class="icons">
+      <div class="icon icon-bell"></div>
+      <div class="icon icon-user"></div>
+    </div>
+  </div>
+
+  <!-- Dashboard Card -->
+  <div class="dashboard-card">
+    <div class="welcome">
+      <div class="welcome-icon icon-grid"></div>
+      <div>
+        <div class="welcome-text">Welcome back</div>
+        <div class="dashboard-title">DeffXy Crash</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-icon icon-users"></div>
+        <div>
+          <div class="stat-label">Online Users</div>
+          <div class="stat-value online-users">0</div>
         </div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-icon icon-link"></div>
+        <div>
+          <div class="stat-label">Connections</div>
+          <div class="stat-value connections">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Latest News -->
+  <div class="section-title">Latest News</div>
+  <div class="news-card">
+    <img src="https://autoresbot.com/tmp_files/1c6c647d-2a67-4246-ab20-d2b3f2d7e344.jpg" alt="News Image" class="news-image">
+    <div class="news-overlay">
+      <div class="news-title">DeffXy</div>
+      <div class="news-desc">Buy Access Chat @ALIFXYOFFICIAL</div>
+    </div>
+  </div>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Gambar</title>
+    <style>
+        .slider-container {
+            width: 100%;
+            max-width: 600px; /* Sesuaikan lebar sesuai kebutuhan */
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            -webkit-overflow-scrolling: touch; /* Untuk iOS */
+        }
+
+        .slide {
+            display: inline-block;
+            width: 100%;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: #6c3483;
+        }
+
+        .slide:last-child {
+            margin-right: 0;
+        }
+
+        .slide:hover {
+            transform: scale(1.02);
+        }
+
+        /* Gaya untuk perangkat mobile */
+        @media (max-width: 768px) {
+            .slider-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <!-- Gambar pertama (karakter ungu/pink) -->
+        <img src="https://files.catbox.moe/il537k.jpg" alt="Karakter Ungu" class="slide">
+        
+        <!-- Gambar kedua (karakter anime putih) -->
+        <img src="https://files.catbox.moe/1t3uaq.jpg" alt="Karakter Anime" class="slide">
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
+    <p style="margin-top: 20px; text-align: center;">
+        𝐄𝐗𝐈𝐙 ||  𝐃𝐄𝐅𝐅𝐗𝐘 𝐁𝐲 𝐀𝐥𝐢𝐟𝐗𝐲
+    </p>
+</body>
+</html>
 
-        <!-- Dashboard Card -->
-        <div class="dashboard-card">
-            <div class="welcome">
-                <div class="welcome-icon icon-grid"></div>
-                <div>
-                    <div class="welcome-text">Welcome back</div>
-                    <div class="dashboard-title">DeffXy Crash</div>
-                </div>
-            </div>
-            <div class="stats-row">
-                <div class="stat-box">
-                    <div class="stat-icon icon-users"></div>
-                    <div>
-                        <div class="stat-label">Online Users</div>
-                        <div class="stat-value online-users">0</div>
-                    </div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon icon-link"></div>
-                    <div>
-                        <div class="stat-label">Connections</div>
-                        <div class="stat-value connections">0</div>
-                    </div>
-                </div>
-            </div>
+  <!-- Account Statistics -->
+  <div class="section-title">Account Statistics</div>
+  <div class="account-stats">
+    <div class="account-row">
+      <div class="account-box">
+        <div class="account-icon icon-person"></div>
+        <div>
+          <div class="account-label">Username</div>
+          <div class="account-value">DeffXy</div>
         </div>
-
-        <!-- Latest News -->
-        <div class="section-title">Latest News</div>
-        <div class="news-card">
-            <img src="https://autoresbot.com/tmp_files/1c6c647d-2a67-4246-ab20-d2b3f2d7e344.jpg" alt="News Image" class="news-image">
-            <div class="news-overlay">                <div class="news-title">DeffXy</div>
-                <div class="news-desc">Buy Access Chat @ALIFXYOFFICIAL</div>
-            </div>
+      </div>
+      <div class="account-box">
+        <div class="account-icon icon-shield" style="color: #ff5555;"></div>
+        <div>
+          <div class="account-label">Role</div>
+          <div class="account-value role-owner">MEMBER</div>
         </div>
-
-        <!-- Slider Gambar -->
-        <div class="section-title">EXIZ || DEFFXY By AlifXy</div>
-        <div class="slider-container">
-            <img src="https://files.catbox.moe/il537k.jpg" alt="Karakter Ungu" class="slide">
-            <img src="https://files.catbox.moe/1t3uaq.jpg" alt="Karakter Anime" class="slide">
-        </div>
-        <div class="slider-caption">EXIZ || DEFFXY By AlifXy</div>
-
-        <!-- Account Statistics -->
-        <div class="section-title">Account Statistics</div>
-        <div class="account-stats">
-            <div class="account-row">
-                <div class="account-box">
-                    <div class="account-icon icon-person"></div>
-                    <div>
-                        <div class="account-label">Username</div>
-                        <div class="account-value">DeffXy</div>
-                    </div>
-                </div>
-                <div class="account-box">
-                    <div class="account-icon icon-shield" style="color: #ff5555;"></div>
-                    <div>
-                        <div class="account-label">Role</div>
-                        <div class="account-value role-owner">MEMBER</div>
-                    </div>
-                </div>
-            </div>
-            <div class="account-expire">
-                <div class="expire-icon icon-calendar"></div>
-                <div>
-                    <div class="expire-label">Account Expires</div>
-                    <div class="expire-value">2025-12-18</div>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
+    <div class="account-expire">
+      <div class="expire-icon icon-calendar"></div>
+      <div>
+        <div class="expire-label">Account Expires</div>
+        <div class="expire-value">2025-12-18</div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Bottom Navigation Bar -->
+  <!-- Bottom Navigation Bar -->
+  <div class="nav-bar">
+    <div class="nav-item active">
+      <div class="nav-icon icon-home"></div>
+      <div class="nav-label">Home</div>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon icon-whatsapp"></div>
+      <div class="nav-label">WhatsApp</div>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon icon-bug-system"></div>
+      <div class="nav-label">bug-system</div>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon icon-tools"></div>
+      <div class="nav-label">Tools</div>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon icon-anime"></div>
+      <div class="nav-label">Anime</div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+    <!-- Menu Navigasi Bawah -->
     <div class="bottom-nav">
         <div class="nav-item" onclick="window.location.href='index.html'">
             <span class="nav-icon icon-home"></span>
             <span class="nav-text">Home</span>
         </div>
-        <div class="nav-item active">            <span class="nav-icon icon-whatsapp"></span>
+        <div class="nav-item active">
+            <span class="nav-icon icon-whatsapp"></span>
             <span class="nav-text">WhatsApp</span>
         </div>
         <div class="nav-item" onclick="window.location.href='dashboard.html'">
