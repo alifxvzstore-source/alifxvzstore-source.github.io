@@ -279,6 +279,85 @@
 </head>
 <body>
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XWORM - XX Header</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0d1117; /* Dark navy, seperti di gambar */
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 60px;
+      background-color: #0d1117;
+      color: white;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
+    }
+
+    .icons {
+      display: flex;
+      gap: 24px;
+      font-size: 1.5rem;
+    }
+
+    .icon {
+      color: white;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .icon:hover {
+      opacity: 0.8;
+    }
+
+    /* Hamburger menu icon (fallback jika Font Awesome tidak tersedia) */
+    .hamburger {
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="hamburger">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="logo-text">DeffXy - Draxzy</div>
+
+    <div class="icons">
+      <div class="icon">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="icon">
+        <i class="fas fa-user-circle"></i>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+    
     <!-- Konten Utama -->
     <div class="main-content">
 
