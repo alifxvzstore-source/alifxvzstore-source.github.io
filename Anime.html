@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Station Clone</title>
+    <style>
+        /* Gaya Dasar */
+        body {
+            background-color: #0b011d; /* Ungu gelap sesuai gambar */
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 15px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            color: #ff00ff;
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        .home-btn {
+            background-color: #a332c3;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Search Bar */
+        .search-container {
+            background-color: #1a0b35;
+            border: 1px solid #4a1d7a;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Judul Section */
+        .section-title {
+            border-left: 4px solid #ff0080;
+            padding-left: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        /* Grid Kartu Anime */
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+            gap: 15px;
+        }
+
+        .anime-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #160a2c;
+        }
+
+        .anime-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Badge Rating */
+        .rating-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 128, 0.8);
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* Info di bawah gambar */
+        .anime-info {
+            padding: 10px 5px;
+        }
+        .anime-title {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .anime-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #00c3ff; /* Warna biru muda meta */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">ANIME STATION</div>
+        <button class="home-btn">🏠 HOME</button>
+    </div>
+
+    <div class="search-container">
+        Cari anime (contoh: Naruto, One Piece, Attack on Titan)...
+    </div>
+
+    <h2 class="section-title">ANIME TERPOPULER</h2>
+
+    <div class="anime-grid">
+        <div class="anime-card">
+            <div class="rating-badge">★ 8.6</div>
+            <img src="https://img2.pixhost.to/images/5470/690950485_levvihosting.jpg" alt="AOT">
+            <div class="anime-info">
+                <div class="anime-title">One punch man</div>
+                <div class="anime-meta">
+                    <span>TV</span>
+                    <span>2013</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="anime-card">
+            <div class="rating-badge">★ 8.6</div>
+            <img src="https://img2.pixhost.to/images/5470/690950740_levvihosting.jpg" alt="Death Note">
+            <div class="anime-info">
+                <div class="anime-title">One Piece</div>
+                <div class="anime-meta">
+                    <span>TV</span>
+                    <span>2006</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="anime-card">
+            <div class="rating-badge">★ 9.1</div>
+            <img src="https://img2.pixhost.to/images/5470/690951051_levvihosting.jpg" alt="FMA">
+            <div class="anime-info">
+                <div class="anime-title">Naruto</div>
+                <div class="anime-meta">
+                    <span>TV</span>
+                    <span>2009</span>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+        
+            <div class="anime-grid">
+        <div class="anime-card">
+            <div class="rating-badge">★ 8.6</div>
+            <img src="https://img2.pixhost.to/images/5470/690953441_levvihosting.jpg" alt="AOT">
+            <div class="anime-info">
+                <div class="anime-title">Demon Slayer</div>
+                <div class="anime-meta">
+                    <span>TV</span>
+                    <span>2013</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="anime-card">
+            <div class="rating-badge">★ 8.6</div>
+            <img src="https://img2.pixhost.to/images/5470/690953776_levvihosting.jpg" alt="Death Note">
+            <div class="anime-info">
+                <div class="anime-title">Attack on Titan</div>
+                <div class="anime-meta">
+                    <span>TV</span>
+                    <span>2006</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="anime-card">
+            <div class="rating-badge">★ 9.1</div>
+            <img src="https://img2.pixhost.to/images/5470/690954292_levvihosting.jpg" alt="FMA">
+            <div class="anime-info">
+                <div class="anime-title">Hunter X Hunter</div>
+                <div class="anime-meta">
+                    <span>TV</span>
+                    <span>2009</span>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+        
+    <div class="anime-grid">
+        <div class="anime-card">
+            <div class="rating-badge">★ 9.1</div>
+            <img src="https://img2.pixhost.to/images/5470/690957182_levvihosting.jpg" alt="FMA">
+            <div class="anime-info">
+                <div class="anime-title">Jujutsu kaisen</div>
+                <div class="anime-meta">
+                    <span>TV</span>
+                    <span>2009</span>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
