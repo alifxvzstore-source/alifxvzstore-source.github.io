@@ -27,10 +27,63 @@
             transition: all 0.3s ease;
         }
 
-    .stat-label {
-      font-size: 14px;
-      color: var(--text-light);
+    .tool-desc {
+      font-size: 0.75rem;
+      opacity: 0.8;
     }
+    
+        .tool-title {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+        .tool-icon {
+      width: 50px;
+      height: 50px;
+      background: #9c27b0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-size: 1.5rem;
+      color: white;
+    }
+    
+        .tool-card {
+      background: linear-gradient(135deg, #2d004b, #4a0080);
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+    }
+    
+        .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    
+        
+                .section-header {
+            background: linear-gradient(90deg, #8a2be2, #4b0082);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            margin: 0 -15px 10px -15px;
+            font-size: 16px;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
         
         .bottom-nav {
             width: 100%;
@@ -718,10 +771,7 @@
       font-size: 20px;
     }
 
-    .stat-label {
-      font-size: 12px;
-      opacity: 0.8;
-    }
+ 
 
     .stat-value {
       font-size: 18px;
@@ -974,21 +1024,14 @@
       <div class="stat-box">
         <div class="stat-icon icon-users"></div>
         <div>
-          <div class="stat-label">Online Users</div>
+          <div class="">Online Users</div>
           <div class="stat-value online-users">0</div>
-        </div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-icon icon-link"></div>
-        <div>
-          <div class="stat-label">Connections</div>
-          <div class="stat-value connections">0</div>
         </div>
       </div>
     </div>
   </div>
 
-      <!-- Latest News -->
+    <!-- Latest News -->
     <div class="section-title">Latest News</div>
     <div class="news-carousel">
       <div class="news-card">
@@ -1094,7 +1137,11 @@
     </div>
   </div>
 
-
+      <div class="dashboard-grid">
+<a href="tes.html" class="tool-card">
+    <div class="tool-icon">📞</div>
+    <div class="tool-title">Sender</div>
+</a>
 
 </body>
 </html>
