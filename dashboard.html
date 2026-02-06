@@ -1505,15 +1505,91 @@
             <input id="number" placeholder="ex +62xxxxxxxxxx">
 
             <div class="section-header">Pilih Bug Target / 目的地番号</div>
-            <select id="type">
-                <option value="">Select bug / バグを選択</option>
-                <option>𝐈⃨𝐍⃕𝐕͜𝐈𝐒͠ ᪣ 𝐈⃨𝐎᷍𝐒☇⃟🌀</option>
-                <option>𝐃͟𝐞⃕𝐥͜𝐚͠𝐲 ᪣ 𝐈⃨𝐧̈́𝐯⃑͜𝐢𝐬̽͟𝐢𝐛͜𝐥𝐞̈́☇⃟👻</option>
-                <option>𝐅͟𝐨⃕𝐫͜𝐜͠𝐞 ᪣ 𝐇⃨𝐚᷍𝐫͟𝐝☇⃟🎭</option>
-                <option>𝐀⃨𝐧̈́𝐝͜𝐫͟𝐨͠ ᪣ 𝐂⃕𝐨͜𝐦͢𝐛⃨𝐨͎ 𝐕𝟑☇⃟🔪</option>
-                <option>𝐊⃨𝐢⃕𝐥͜𝐥͠ ᪣ 𝐈⃨𝐎᷍𝐒☇⃟☠️</option>
-            </select>
+            <div class="custom-select" onclick="toggleDropdown()">
+  <div class="selected">Select bug / バグを選択</div>
+  <div class="dropdown">
+    <div data-value="">Select bug / バグを選択</div>
+    <div data-value="INVIS_IOS">𝐈⃨𝐍⃕𝐕͜𝐈𝐒͠ ᪣ 𝐈⃨𝐎᷍𝐒☇⃟🌀</div>
+    <div data-value="DELAY_INVIS">𝐃͟𝐞⃕𝐥͜𝐚͠𝐲 ᪣ 𝐈⃨𝐧̈́𝐯⃑͜𝐢𝐬̽͟𝐢𝐛͜𝐥𝐞̈́☇⃟👻</div>
+    <div data-value="FORCE_HARD">𝐅͟𝐨⃕𝐫͜𝐜͠𝐞 ᪣ 𝐇⃨𝐚᷍𝐫͟𝐝☇⃟🎭</div>
+    <div data-value="ANDROID_COMBO">𝐀⃨𝐧̈́𝐝͜𝐫͟𝐨͠ ᪣ 𝐂⃕𝐨͜𝐦͢𝐛⃨𝐨͎ 𝐕𝟑☇⃟🔪</div>
+    <div data-value="KILL_IOS">𝐊⃨𝐢⃕𝐥͜𝐥͠ ᪣ 𝐈⃨𝐎᷍𝐒☇⃟☠️</div>
+  </div>
+  <input type="hidden" id="type" value="">
+</div>
 
+<script>
+function toggleDropdown() {
+  document.querySelector('.custom-select .dropdown').classList.toggle('show');
+}
+
+document.querySelectorAll('.custom-select .dropdown div').forEach(el => {
+  el.addEventListener('click', function() {
+    const val = this.getAttribute('data-value');
+    const text = this.textContent;
+    document.querySelector('.custom-select .selected').textContent = text;
+    document.getElementById('type').value = val;
+    document.querySelector('.custom-select .dropdown').classList.remove('show');
+  });
+});
+
+// Tutup saat klik di luar
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.custom-select')) {
+    document.querySelector('.custom-select .dropdown').classList.remove('show');
+  }
+});
+</script>
+
+<style>
+.custom-select {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.custom-select .selected {
+  padding: 12px 16px;
+  background: #120f22;
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: #e0d6ff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-select .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1a142d;
+  border: 1px solid #333;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+  margin-top: 4px;
+}
+
+.custom-select .dropdown.show {
+  display: block;
+}
+
+.custom-select .dropdown div {
+  padding: 12px 16px;
+  color: #e0d6ff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.custom-select .dropdown div:hover {
+  background: #2a204a;
+}
+</style>
             <button onclick="sendReport()">SEND</button>
         </div>
 
